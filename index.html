@@ -7,10 +7,65 @@
     <title>Static Template</title>
   </head>
   <body>
+    <script type="text/javascript" id="zsiqchat">
+      var $zoho = $zoho || {}
+      $zoho.salesiq = $zoho.salesiq || {
+        widgetcode:
+          'cd9dd377631dbac518f3d0d87061c175363c85a26acb3643ca1093433134019129bc20a1cf32f600d74f3c2d05514682',
+        values: {},
+        ready: function () { },
+      }
+      var d = document
+      s = d.createElement('script')
+      s.type = 'text/javascript'
+      s.id = 'zsiqscript'
+      s.defer = true
+      s.src = 'https://salesiq.zoho.com/widget'
+      t = d.getElementsByTagName('script')[0]
+      t.parentNode.insertBefore(s, t)
+        ; ("<div id='zsiqwidget'></div>")
+
+      $zoho.salesiq.ready = function () {
+        $zoho.salesiq.customfield.add({
+          name: 'Date of Birth',
+          hint: 'Enter your DOB (Required)',
+          type: 'text',
+          required: 'true',
+          visibility: 'online',
+        })
+        $zoho.salesiq.customfield.add({
+          name: 'Company',
+          hint: 'Enter your company name (Required)',
+          type: 'text',
+          required: 'true',
+          visibility: 'both',
+          callback: function (value) { },
+        })
+      }
+    </script>
     <script>
+      function getSalesIQWidget() {
+          if (window.$zoho.salesiq) {
+            return window.$zoho.salesiq
+          } else {
+            console.error("SalesIQ widget not found/ready yet")
+            return undefined;
+          }
+        }
       function testSalesIQ() {
         let word = document.getElementById("searchTxt").value;
-        console.log("help me switch from word=", word);
+        let msg = "Help me switch from " + word;
+        console.log("msg=", msg);
+        let salesIQWidget = getSalesIQWidget();
+        //samle changes to test for example positioning changes
+        console.log("setting visitor question....")
+        salesIQWidget.visitor.question(msg)
+        console.log("showing window...")
+        salesIQWidget.floatwindow.visible('show')
+        console.log("starting chat.... window")
+        salesIQWidget.chat.start()
+        console.log("finished with test...")
+
       }
     </script>
     <h1>Zoho Sales IQ Test</h1>
