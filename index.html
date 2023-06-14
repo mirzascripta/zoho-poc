@@ -59,7 +59,18 @@
         let salesIQWidget = getSalesIQWidget();
         //samle changes to test for example positioning changes
         console.log("setting visitor question....")
-        salesIQWidget.visitor.question(msg)
+
+        salesIQWidget.visitor.info({
+            MessageTitle:
+              'Help Me Switch Request (dev test please ignore)',
+            MemberId: '1234',
+            ClientId: '12312',
+            FirstName: 'Test Member Name',
+            PrescriberName: 'Test Doctor Name',
+          })
+
+
+        // salesIQWidget.visitor.question(msg)
         console.log("showing window...")
         salesIQWidget.floatwindow.visible('show')
         console.log("starting chat.... window")
